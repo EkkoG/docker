@@ -16,8 +16,10 @@ RUN yum install -y git \
         zlib-devel \
         patch
 
-RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash - \
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - \
     && yum install -y nodejs
+
+WORKDIR /app
 
 COPY app /app
 
@@ -29,6 +31,5 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN mkdir /app/dist
 
-WORKDIR /app
 VOLUME ["/webpack/src", "/app/dist"]
 ENTRYPOINT ["/entrypoint.sh"]
